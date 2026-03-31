@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "superagent-image-search-mcp-server": {
+      "command": "java",
+      "args": [
+        "-Dspring.ai.mcp.server.stdio=true",
+        "-Dspring.main.web-application-type=none",
+        "-Dspring.main.banner-mode=off",
+        "-Dspring.main.log-startup-info=false",
+        "-Dlogging.level.root=ERROR",
+        "-jar",
+        "superagent-imgsearch-mcp-server/target/superagent-imgsearch-mcp-server-0.0.1-SNAPSHOT.jar"
+      ],
+      "env": {}
+    }
+  }
+}
