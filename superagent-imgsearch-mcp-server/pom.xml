@@ -13,9 +13,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>superagent-imgsearch-mcp-server</name>
     <description>superagent-imgsearch-mcp-server</description>
-    <url/>
+    <url>https://github.com/Madfeng-lab/superagent</url>
     <licenses>
-        <license/>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
     <developers>
         <developer/>
