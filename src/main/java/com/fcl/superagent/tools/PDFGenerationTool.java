@@ -36,8 +36,11 @@ public class PDFGenerationTool {
 //                        .toAbsolutePath().toString();
 //                PdfFont font = PdfFontFactory.createFont(fontPath,
 //                        PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
-                // 使用内置中文字体
-                PdfFont font = PdfFontFactory.createFont("STSongStd-Light", "UniGB-UCS2-H");
+                // 依赖 com.itextpdf:font-asian（勿设为 test scope），否则报 “font STSongStd-Light is not recognized”
+                PdfFont font = PdfFontFactory.createFont(
+                        "STSongStd-Light",
+                        "UniGB-UCS2-H",
+                        PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
                 document.setFont(font);
                 // 创建段落
                 Paragraph paragraph = new Paragraph(content);

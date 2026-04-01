@@ -38,7 +38,7 @@ public class AiConfig {
     @Bean
     public ChatClient chatClient(@Qualifier("dashScopeChatModel") ChatModel chatModel, ChatMemory chatMemory) {
         return ChatClient.builder(chatModel)
-               // .defaultSystem(SYSTEM_PROMPT) //系统提示词
+                .defaultSystem(SYSTEM_PROMPT) //系统提示词
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(), //对话记忆Advisor
                         new MyLoggerAdvisor()) //自定义日志Advisor，可按需开启
                         //,new ReReadingAdvisor())//自定义推理增强Advisor，可按需开启

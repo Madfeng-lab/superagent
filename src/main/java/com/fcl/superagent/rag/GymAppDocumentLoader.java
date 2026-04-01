@@ -32,7 +32,12 @@ public class GymAppDocumentLoader {
     public List<Document> loadMarkdowns() {
         List<Document> allDocuments = new ArrayList<>();
         try {
-            Resource[] resources = resourcePatternResolver.getResources("classpath:document/*.md");
+            // 使用 classpath* 兼容 fat-jar / 不同容器中对目录 URL 的解析差异
+            Resource[] resources = resourcePatternResolver.getResources("classpath*:document/*.md");
+            if (resources == null || resources.length == 0) {
+                log.warn("未找到 classpath*:document/*.md，跳过知识库文档加载");
+                return allDocuments;
+            }
             String strlist = "习惯,健康,健身,增肌,减脂,饮食,营养,运动";
             String[] liststatu = strlist.split(",");
             int i = 0;
@@ -51,7 +56,7 @@ public class GymAppDocumentLoader {
             }
 
         } catch (IOException e) {
-           log.error("Markdown 文档加载失败", e);
+           log.warn("Markdown 文档加载失败，已跳过知识库初始化: {}", e.getMessage());
         }
         return allDocuments;
     }

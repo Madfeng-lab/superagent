@@ -33,10 +33,18 @@ public class GymAppVectorStoreConfig {
 
         SimpleVectorStore simpleVectorStore = SimpleVectorStore.builder(dashscopeEmbeddingModel).build();
         List<Document> documents = gymAppDocumentLoader.loadMarkdowns();
+        if (documents == null || documents.isEmpty()) {
+            log.warn("知识库文档为空，返回空向量库（RAG 将不可用）");
+            return simpleVectorStore;
+        }
         //自主切割文档
         //List<Document>  splitDocuments = myTokenTextSplitter.splitCustomized(documents);
         // 自动补充关键词元信息(基于ai)
         List<Document>  enrichedDocuments = myKeywordEnricher.enrichDocuments(documents);
+        if (enrichedDocuments == null || enrichedDocuments.isEmpty()) {
+            log.warn("文档增强结果为空，返回空向量库（RAG 将不可用）");
+            return simpleVectorStore;
+        }
         simpleVectorStore.add(enrichedDocuments);
         return simpleVectorStore;
     }
